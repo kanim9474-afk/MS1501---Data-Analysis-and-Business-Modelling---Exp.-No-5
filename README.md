@@ -42,6 +42,61 @@ The dataset consists of 16 manually entered customer data points representing tw
 | **Visualization (Matplotlib)** | `plt.scatter()` | Plots the data points and centroids in a 2D scatter plot |
 | | `plt.title()`, `plt.xlabel()`, `plt.ylabel()`, `plt.legend()`, `plt.grid()`, `plt.show()` | Configures labels, legend, gridlines, and displays the final graph |
 
-## Program & Output
+## Program & Output  
+# Step 1: Import required Python libraries  
+import numpy as np   
+import matplotlib.pyplot as plt  
+from sklearn.cluster import KMeans  
+  
+# Step 2: Define manual data arrays (X and Y coordinates)  
+x = np.array([20, 22, 25, 70, 75, 80, 30, 35, 32, 24, 28, 75, 71, 83, 28, 27])  
+y = np.array([30, 35, 40, 80, 85, 90, 70, 75, 33, 31, 45, 70, 83, 89, 60, 67])  
+
+print("Annual Income (X):")  
+print(x)  
+print("\nSpending Score (Y):")  
+print(y)  
+
+# Step 3: Combine X and Y as features for clustering  
+X = np.column_stack((x, y))  
+
+print("Combined Dataset (Annual Income, Spending Score):")  
+print(X)
+print("\nDataset Shape:", X.shape)  
+
+# Step 4: Apply K-Means clustering with 3 clusters  
+# n_init=10 is used for compatibility across scikit-learn versions.  
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)  
+labels = kmeans.fit_predict(X)  
+
+# Step 5: Retrieve cluster centroids and labels  
+centroids = kmeans.cluster_centers_  
+
+print("Cluster Labels for Data Points:")   
+print(labels)  
+
+print("\nCluster Centroids (Coordinates):")  
+print(centroids)  
+  
+# Step 6: Visualize clusters and centroids  
+plt.figure(figsize=(8, 6))  
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap="viridis", s=100, alpha=0.8, label="Data Points")  
+plt.scatter(centroids[:, 0], centroids[:, 1], c="red", marker="X", s=200, label="Centroids")  
+
+plt.title("K-Means Clustering for Market Segmentation")  
+plt.xlabel("Feature 1 (e.g., Annual Income)")  
+plt.ylabel("Feature 2 (e.g., Spending Score)")  
+plt.legend()  
+plt.grid(True)  
+plt.show()  
+
+# Step 7: Display the members and size of each cluster  
+for cluster_id in range(kmeans.n_clusters):  
+    members = X[labels == cluster_id]  
+    print(f"Cluster {cluster_id}: {len(members)} data points")  
+    print(members)  
+    print()  
+
+    <img width="711" height="570" alt="image" src="https://github.com/user-attachments/assets/5983ea2c-a509-4971-a4b2-c31f2bc668f1" />
 
 ## Result
