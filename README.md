@@ -96,7 +96,6 @@ for cluster_id in range(kmeans.n_clusters):
     print(f"Cluster {cluster_id}: {len(members)} data points")  
     print(members)  
     print()  
-
     <img width="711" height="570" alt="image" src="https://github.com/user-attachments/assets/5983ea2c-a509-4971-a4b2-c31f2bc668f1" />
 
 ## Result
